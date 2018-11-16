@@ -12,7 +12,7 @@ class App extends Component {
 
           <Link to="/react-router">React Router</Link>
 
-          <Route path="/react-router" component={Index}></Route>
+          <Route path="/react-router" children={() => Index}></Route>
         </div>
       </Router>
     );
