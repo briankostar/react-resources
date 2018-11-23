@@ -9,6 +9,14 @@ function SubRouteHandleComponent({ match }) {
     )
 }
 
+function SubRouteHandleComponentLimit({ match }) {
+    return (
+        <div>
+            Only shows when routeId is 1, 2 or 3
+        </div>
+    )
+}
+
 export function DynamicSubRoute({ match }) {
     return (
         <div>
@@ -19,6 +27,7 @@ export function DynamicSubRoute({ match }) {
 
             <Route exact path={match.path} render={() => <h3>Select a subroute</h3>}></Route>
             <Route path={`${match.path}/:routeId`} component={SubRouteHandleComponent}></Route>
+            <Route path={`${match.path}/:routeId(1|2|3)`} component={SubRouteHandleComponentLimit}></Route>
         </div>
     )
 }
