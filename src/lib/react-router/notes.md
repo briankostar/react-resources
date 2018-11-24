@@ -82,3 +82,9 @@ We can also reroute with history. Make a HOC with `withRouter`, which will have 
                 onClick={() => {
                 auth.logout(() => history.push("/react-router/simple-login"));
             }}</button></div> )
+
+## Prompt
+You may want to prompt user before transition. ie when form is only half filled, or unsaved state. Use `<Prompt>` for handling this.  
+
+    <Prompt when={this.state.isBlocking} message="You have unsaved changes. Sure you wanna move?"></Prompt>
+            
