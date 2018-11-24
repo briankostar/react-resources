@@ -64,3 +64,21 @@ We need the location to change. However, if we use the normal `<a>` tag, it'll c
     <Link to={{pathname: '/user/24'}}>User 24</Link>
 
 Link's `to` prop takes string or location object, which contains pathname, search, hash, state properties. String will actually be converted to location obj.
+
+## Redirects
+One Way to reroute is via component render of <Redirect>
+
+    <Redirect
+        to={{
+            pathname: `/react-router/simple-login/login`,
+            state: { from: props.location }
+        }}
+    />
+We can also reroute with history. Make a HOC with `withRouter`, which will have access to `history`.  
+
+    const AuthButton = withRouter(
+        ({ history }) => (<div>
+            <button
+                onClick={() => {
+                auth.logout(() => history.push("/react-router/simple-login"));
+            }}</button></div> )
