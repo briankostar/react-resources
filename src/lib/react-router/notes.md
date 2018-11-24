@@ -33,10 +33,13 @@ Mostly use `component`. The rendered component will also recieve `match, locatio
 `<Switch>` component will only render the first matching `<Route>` and helps keep our code cleaner. Eg:
 
     <Switch>
-    <Route exact path='/' component={Home}/>
-    <Route path='/user' component={User}/> //Also matches /user:id
-    <Route path='/login' component={Login}/>
+        <Route exact path='/' component={Home}/>
+        <Route path='/user' component={User}/> //Also matches /user:id
+        <Route path='/login' component={Login}/>
+        <Route component={404}/>  //captures all other routes
     </Switch>
+
+By combining `Switch` with a route that captures for all render, we can easily make 404 page
 
 ## Nested Routes
 
