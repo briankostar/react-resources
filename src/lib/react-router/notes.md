@@ -18,15 +18,67 @@ Place `<Route>` component anywhere and it will render a component when the path 
 Route component doesn't care about the URL params for matching. `/search?q=test` will only match `/search`
 After route is matched, a `match` object will be created with url, path, isExact and params.
 
-#### Route can render content via 3 properties:
+##### Route can render content via 3 properties:
 
-1. component: `<Route path='/login' component={Login} />`
-2. render function that return an element.  
+1. **component**: `<Route path='/login' component={Login} />`
+2. **render**: takes function that return an element.  
    `<Route path='/login' render={()=>{Login}} />`
-3. children with function that return an element. (will always show content)  
+3. **children**: also takes function that return an element. (will always render even if path doesn't match. passed match will be null if no match)  
    `<Route path='/login' children={()=>{Login}} />`
 
-Mostly use `component`. The rendered component will also recieve `match, location, and history` object as prop.
+The rendered component will recieve `match, location, and history` object as prop. These have info about how the <Route> matched the URL.
+
+
+##### Match:
+Obj with info about how <Route path> was matched to the URL.  
+Comes with Route component/render/children and withRouter, and matchPath.
+
+    {
+        params: obj, 
+        isExact: bool. True if entire URL was exactly matched,
+        path: string. path pattern used to match
+        url: string. matched url.
+    }
+If `path` is not provided in Route, path will be closest parent match
+match obj can be null
+
+##### Location:
+Obj representing where the app is now. It's immutable?  
+Comes with Route component/render/children and withRouter.  Eg.  
+
+    {
+        key: 'ac3df4', // not with HashHistory!
+        pathname: '/somewhere'
+        search: '?some=search-string',
+        hash: '#howdy',
+        state: {
+            [userDefined]: true
+        }
+    }
+
+Location obj can be used instead of string for:
+    
+    <Link to={location}/>
+    <Redirect to={location}/>
+    history.push(location)
+    history.replace(location)
+    also pass it to Route, and Switch
+
+##### History:
+Obj from another library. Manages browser history. It is mutable so do not change it.
+
+    {
+        length: number. # of history stack,
+        action: string. current action (PUSH, REPLACE, POP),
+        location: object. current location. similar to `location` object, but mutable,
+        push(path, [state]): function. pushes new history,
+        replace(path, [state]): function. replaces current entry,
+        go(n): function. moves pointer in history to n,
+        goBack(): function, back page. same as go(-1),
+        goForward(): function, forward page. same as go (1),
+        block(prompt): function. prevents navigation
+    }
+
 
 ## Switch Component
 
@@ -39,7 +91,15 @@ Mostly use `component`. The rendered component will also recieve `match, locatio
         <Route component={404}/>  //captures all other routes
     </Switch>
 
-By combining `Switch` with a route that captures for all render, we can easily make 404 page
+By combining `Switch` with a route that captures for all render, we can easily make 404 page.
+
+`Switch` is also useful for ambiguous route matches. eg when we want both /about, and /:users, which is dynamic and can match anything. If we have a switch, it'll match the defined routes first and treat the rest as dynamic routes.   
+
+    <Switch>
+        <Route path="/about" component={About} />
+        <Route path="/company" component={Company} />
+        <Route path="/:user" component={User} />   //matches anything else
+    </Switch>
 
 ## Nested Routes
 
@@ -56,6 +116,14 @@ Above /user and /user:id will both be rendered by User component. If we want to 
 
 How do we capture params?  
 For /user/:id , url after /user/ will be captured as id and stored in `match.params.id` in the prop of the rendering component.
+
+## Queries
+React router doesn't have any opinions on parsing URL query strings. However, we can use [URL api](https://developer.mozilla.org/en-US/docs/Web/API/URL) with `location`.
+
+    let params = new URLSearchParams(location.search);
+    <Link to={{ pathname: "/account", search: "?name=netflix" }}>Netflix</Link>
+    //Use
+    params.get("name")  
 
 ## Links
 
