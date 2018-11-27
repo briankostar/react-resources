@@ -3,6 +3,16 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
 
+
+import { createStore, applyMiddleware } from 'redux';
+import { thunk } from 'redux-thunk';
+import rootReducer from './thunk/reducers/index';
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
+
 const Index = () => <h2>Home</h2>;
 
 class App extends Component {
