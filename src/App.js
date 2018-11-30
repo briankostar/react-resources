@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
+import { ReduxShowcase } from './lib/redux/ReduxShowcase'
 import { ThunkShowcase } from './lib/thunk/ThunkShowcase'
 
 import { createStore, applyMiddleware } from 'redux';
@@ -25,10 +26,12 @@ class App extends Component {
             <h2>React Resources:</h2>
 
             <Link to="/react-router">React Router</Link>
+            <Link to="/redux">Redux</Link>
             <Link to="/thunk">Thunk</Link>
             <Link to="/saga">Saga</Link>
 
             <Route path="/react-router" component={ReactRouterShowcase}></Route>
+            <Route path="/redux" component={ReduxShowcase}></Route>
             <Route path="/thunk" component={ThunkShowcase}></Route>
           </div>
         </BrowserRouter>
