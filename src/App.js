@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
-import { ReduxShowcase } from './lib/redux/ReduxShowcase'
+import ReduxShowcase from './lib/redux/ReduxShowcase'
 import { ThunkShowcase } from './lib/thunk/ThunkShowcase'
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
+import rootReducer from './lib/redux/reducers/index';
 import thunk from 'redux-thunk';
-// import rootReducer from './thunk/reducers/index';
 
 const store = createStore(
-  // rootReducer,
+  rootReducer,
   applyMiddleware(thunk)
 );
 
