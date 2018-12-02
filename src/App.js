@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
 import ReduxShowcase from './lib/redux/ReduxShowcase'
-import { ThunkShowcase } from './lib/thunk/ThunkShowcase'
+import ThunkShowcase from './lib/thunk/ThunkShowcase'
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'

@@ -15,8 +15,8 @@ Thunk middleware makes this easy for us by letting `dispatch()` take a function 
 
 
 ### How to use:
-`npm install redux-thunk`
-`import applyMiddleware from redux and thunk from redux-thunk`  
+`npm install redux-thunk`  
+then import applyMiddleware from redux and thunk from redux-thunk  
 create store:  
 `const store = createStore( rootReducer, applyMiddleware(thunk))`
 By enabling thunk middleware, anytime we dispatch a function, the middleware will call that function with `dispatch` object.
