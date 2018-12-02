@@ -30,3 +30,11 @@ This is why when we define a dispatch function, we return a function that takes 
         }
     }
 Redux-thunk also passes getState as the second argument so owe have access to the current state of the store if we need any logic based on that.
+
+## Summary
+Thunk is a redux middleware that help control async action on dispatch. 
+By calling store.dispatch(thunk), instead of executing the action right away, thunk will execute it's async call and then call dispatch by itself.  
+Thunk just needs to return a function that takes dispatch (the library will pass this) and eventually uses this dispatch to execute an action.
+
+## Notes
+If we pass 2nd param (dispatchToProps), dispatch won't be passed to props. 

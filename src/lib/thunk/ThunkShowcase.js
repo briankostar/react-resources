@@ -24,14 +24,16 @@ class ThunkShowcase extends Component {
     }
 
     render() {
-        const { num } = this.props;
-
+        const { num, addViaConnect, subViaConnect } = this.props;
+        console.log(this.props)
         return (
             <div>
                 <h2>ThunkShowcase</h2>
                 Number: {num}
-                <button onClick={this.add}>Add</button>
-                <button onClick={this.sub}>Subtract</button>
+                {/* <button onClick={this.add}>Add</button> */}
+                {/* <button onClick={this.sub}>Subtract</button> */}
+                <button onClick={addViaConnect}>addViaConnect</button>
+                <button onClick={subViaConnect}>subViaConnect</button>
             </div>
         )
     }
@@ -43,7 +45,19 @@ const mapStateToProps = state => {
     }
 }
 
+//We can use this method too, but this will stop 'dispatch' from being pass to props.
+const mapDispatchToProps = dispatch => {
+    return {
+        addViaConnect: () => {
+            dispatch(thunkForActionDispatch('ADD'));
+        },
+        subViaConnect: () => {
+            dispatch(thunkForActionDispatch('SUB'));
+        }
+    }
+}
+
 export default connect(
-    mapStateToProps
-    // mapDispatchToProps  //no need to pass dispatch to set store as we're doing it via thunk
+    mapStateToProps,
+    mapDispatchToProps  //this is optional. If not passed, ThunkShowcase receives dispatch obj which we can still use for thunk
 )(ThunkShowcase)
