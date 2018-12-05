@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Button } from 'semantic-ui-react'
 
 const mapStateToProps = state => {
     return {
@@ -28,9 +29,9 @@ class SagaShowcase extends Component {
             <div>
                 <h2>SagaShowcase</h2>
                 Number: {num}
-                <button onClick={add}>Add</button>
-                <button onClick={add_async}>Add After 1 Sec</button>
-                <button onClick={sub}>Subtract</button>
+                <Button primary onClick={add}>Add</Button>
+                <Button primary onClick={add_async}>Add After 1 Sec</Button>
+                <Button primary onClick={sub}>Subtract</Button>
             </div>
         )
     }
