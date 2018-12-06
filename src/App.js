@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Icon, Dropdown } from 'semantic-ui-react'
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
@@ -35,32 +35,35 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <Menu>
-              <Menu.Item
-                name='React Resources'
-                // active={activeItem === 'home'}
-                onClick={this.handleItemClick}
-              />
+            <Menu size='large'>
+              <Link to="/">
+                <Menu.Item link name='home' active={false} onClick={this.handleItemClick}>
+                  <Icon name='home' />
+                  React Resources
+                </Menu.Item>
+              </Link>
+
+              <Menu.Menu >
+                <Dropdown item text='Libraries'>
+                  <Dropdown.Menu>
+                    <Link to="/react-router"><Dropdown.Item>React Router</Dropdown.Item></Link>
+                    <Link to="/redux"><Dropdown.Item>Redux</Dropdown.Item></Link>
+                    <Link to="/thunk"><Dropdown.Item>Thunk</Dropdown.Item></Link>
+                    <Link to="/saga"><Dropdown.Item link>Saga</Dropdown.Item></Link>
+                  </Dropdown.Menu>
+                </Dropdown>
+
+              </Menu.Menu>
             </Menu>
-
-            <h2>React Resources:</h2>
-
-            <ul>
-              <li><Link to="/react-router">React Router</Link></li>
-              <li><Link to="/redux">Redux</Link></li>
-              <li><Link to="/thunk">Thunk</Link></li>
-              <li><Link to="/saga">Saga</Link></li>
-            </ul>
 
             <Route path="/react-router" component={ReactRouterShowcase}></Route>
             <Route path="/redux" component={ReduxShowcase}></Route>
             <Route path="/thunk" component={ThunkShowcase}></Route>
             <Route path="/saga" component={SagaShowcase}></Route>
 
-
-          </div>
-        </BrowserRouter>
-      </Provider>
+          </div >
+        </BrowserRouter >
+      </Provider >
     );
   }
 }
