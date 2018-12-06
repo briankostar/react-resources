@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Menu } from 'semantic-ui-react'
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
@@ -34,6 +35,14 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
+            <Menu>
+              <Menu.Item
+                name='React Resources'
+                // active={activeItem === 'home'}
+                onClick={this.handleItemClick}
+              />
+            </Menu>
+
             <h2>React Resources:</h2>
 
             <ul>
@@ -47,6 +56,7 @@ class App extends Component {
             <Route path="/redux" component={ReduxShowcase}></Route>
             <Route path="/thunk" component={ThunkShowcase}></Route>
             <Route path="/saga" component={SagaShowcase}></Route>
+
 
           </div>
         </BrowserRouter>
