@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Dropdown } from 'semantic-ui-react'
-import axios from 'axios'
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
@@ -11,12 +10,12 @@ import { Provider } from 'react-redux'
 import rootReducer from './lib/redux/reducers/index';
 import thunk from 'redux-thunk';
 
+import Home from './components/home/home'
 import ReduxShowcase from './lib/redux/ReduxShowcase'
 import ThunkShowcase from './lib/thunk/ThunkShowcase'
 import rootSaga from './lib/saga/sagas/index'
 import SagaShowcase from './lib/saga/SagaShowcase'
 
-import ReactMarkdown from 'react-markdown'
 
 // Saga
 import createSagaMiddleware from 'redux-saga'
@@ -28,23 +27,11 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 );
 
-
 sagaMiddleware.run(rootSaga)
 
 const Index = () => <h2>Home</h2>;
 
-const input = '# This is a header\n\nAnd this is a paragraph'
-
 class App extends Component {
-  state = { markdown: '' }
-  componentDidMount() {
-    axios.get("https://raw.githubusercontent.com/briankostar/react-resources/master/README.md")
-      .then(res => {
-        console.log('data', res)
-        this.setState({ markdown: res.data })
-      })
-  }
-
 
   render() {
     return (
@@ -72,12 +59,12 @@ class App extends Component {
               </Menu.Menu>
             </Menu>
 
+            <Route path="/" exact={true} component={Home}></Route>
             <Route path="/react-router" component={ReactRouterShowcase}></Route>
             <Route path="/redux" component={ReduxShowcase}></Route>
             <Route path="/thunk" component={ThunkShowcase}></Route>
             <Route path="/saga" component={SagaShowcase}></Route>
 
-            <ReactMarkdown source={this.state.markdown} />
           </div >
         </BrowserRouter >
       </Provider >
