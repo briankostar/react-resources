@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Dropdown } from 'semantic-ui-react'
+import axios from 'axios'
 
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
@@ -15,6 +16,8 @@ import ThunkShowcase from './lib/thunk/ThunkShowcase'
 import rootSaga from './lib/saga/sagas/index'
 import SagaShowcase from './lib/saga/SagaShowcase'
 
+import ReactMarkdown from 'react-markdown'
+
 // Saga
 import createSagaMiddleware from 'redux-saga'
 const sagaMiddleware = createSagaMiddleware()
@@ -25,11 +28,24 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 );
 
+
 sagaMiddleware.run(rootSaga)
 
 const Index = () => <h2>Home</h2>;
 
+const input = '# This is a header\n\nAnd this is a paragraph'
+
 class App extends Component {
+  state = { markdown: '' }
+  componentDidMount() {
+    axios.get("https://raw.githubusercontent.com/briankostar/react-resources/master/README.md")
+      .then(res => {
+        console.log('data', res)
+        this.setState({ markdown: res.data })
+      })
+  }
+
+
   render() {
     return (
       <Provider store={store}>
@@ -49,7 +65,7 @@ class App extends Component {
                     <Link to="/react-router"><Dropdown.Item>React Router</Dropdown.Item></Link>
                     <Link to="/redux"><Dropdown.Item>Redux</Dropdown.Item></Link>
                     <Link to="/thunk"><Dropdown.Item>Thunk</Dropdown.Item></Link>
-                    <Link to="/saga"><Dropdown.Item link>Saga</Dropdown.Item></Link>
+                    <Link to="/saga"><Dropdown.Item>Saga</Dropdown.Item></Link>
                   </Dropdown.Menu>
                 </Dropdown>
 
@@ -61,6 +77,7 @@ class App extends Component {
             <Route path="/thunk" component={ThunkShowcase}></Route>
             <Route path="/saga" component={SagaShowcase}></Route>
 
+            <ReactMarkdown source={this.state.markdown} />
           </div >
         </BrowserRouter >
       </Provider >
