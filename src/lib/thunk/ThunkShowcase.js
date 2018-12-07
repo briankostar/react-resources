@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 
 //thunk is a function that returns an expression for use later.
 //in redux-thunk case, it returns a function that takes dispatch, and uses that dispatch after an async call
@@ -28,6 +29,9 @@ class ThunkShowcase extends Component {
         console.log(this.props)
         return (
             <div>
+
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/thunk.md'></MarkdownViewer>
+
                 <h2>ThunkShowcase</h2>
                 Number: {num}
                 {/* <button onClick={this.add}>Add</button> */}

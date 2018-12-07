@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'semantic-ui-react'
+import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 
 const mapStateToProps = state => {
     return {
@@ -27,6 +28,9 @@ class SagaShowcase extends Component {
         const { num, add, add_async, sub } = this.props;
         return (
             <div>
+
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/saga.md'></MarkdownViewer>
+
                 <h2>SagaShowcase</h2>
                 Number: {num}
                 <Button primary onClick={add}>Add</Button>

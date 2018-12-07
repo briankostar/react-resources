@@ -6,6 +6,8 @@ import { SimpleLogin } from './SimpleLogin'
 import { PromptForm } from './PromptForm'
 import { FourOhFour } from './404'
 
+import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
+
 export class ReactRouterShowcase extends Component {
 
     render() {
@@ -20,6 +22,8 @@ export class ReactRouterShowcase extends Component {
                 <Route path={`${this.props.match.url}/simple-login`} component={SimpleLogin}></Route>
                 <Route path={`${this.props.match.url}/prompt`} component={PromptForm}></Route>
                 <Route path={`${this.props.match.url}/404`} component={FourOhFour}></Route>
+
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/react-router.md'></MarkdownViewer>
             </div>
 
         )

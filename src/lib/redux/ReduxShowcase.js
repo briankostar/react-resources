@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 
 const mapStateToProps = state => {
     return {
@@ -23,6 +24,9 @@ class ReduxShowcase extends Component {
         const { num, add, sub } = this.props;
         return (
             <div>
+
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/redux.md'></MarkdownViewer>
+
                 <h2>ReduxShowcase</h2>
                 Number: {num}
                 <button onClick={add}>Add</button>
