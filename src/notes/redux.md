@@ -1,9 +1,9 @@
-# Redux
+# Redux Summary
 
-## What
+## What is it?
 Redux is a library used to manage data state. It's often used with react, but the two librarys can be used completely separate.  
 
-## Why
+## Why use it?
 Idea behind redux is the one single source of truth, which is the data store. It is immutable and tightly controlled so we know exactly how & why the application data is changed.
 
 ##  How it works
