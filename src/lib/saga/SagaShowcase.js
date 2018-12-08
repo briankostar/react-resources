@@ -29,7 +29,7 @@ class SagaShowcase extends Component {
         return (
             <div>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/saga.md'></MarkdownViewer>
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/saga.md'></MarkdownViewer>
 
                 <h2>SagaShowcase</h2>
                 Number: {num}

@@ -25,7 +25,7 @@ class ReduxShowcase extends Component {
         return (
             <div>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/redux.md'></MarkdownViewer>
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/redux.md'></MarkdownViewer>
 
                 <h2>ReduxShowcase</h2>
                 Number: {num}

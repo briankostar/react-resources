@@ -30,7 +30,7 @@ class ThunkShowcase extends Component {
         return (
             <div>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/thunk.md'></MarkdownViewer>
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/thunk.md'></MarkdownViewer>
 
                 <h2>ThunkShowcase</h2>
                 Number: {num}

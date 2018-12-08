@@ -23,7 +23,7 @@ export class ReactRouterShowcase extends Component {
                 <Route path={`${this.props.match.url}/prompt`} component={PromptForm}></Route>
                 <Route path={`${this.props.match.url}/404`} component={FourOhFour}></Route>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/src/notes/react-router.md'></MarkdownViewer>
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/react-router.md'></MarkdownViewer>
             </div>
 
         )
