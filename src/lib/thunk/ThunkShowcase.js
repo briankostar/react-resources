@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Menu, Header } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 
 //thunk is a function that returns an expression for use later.
@@ -16,6 +17,13 @@ function thunkForActionDispatch(type) {
 }
 
 class ThunkShowcase extends Component {
+    state = { activeItem: '' }
+
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name });
+        this.props.history.push(`${this.props.match.url}${name}`)
+    }
+
     add = () => {
         this.props.dispatch(thunkForActionDispatch('ADD'));
     }
@@ -25,14 +33,15 @@ class ThunkShowcase extends Component {
     }
 
     render() {
+        const { activeItem } = this.state
         const { num, addViaConnect, subViaConnect } = this.props;
         console.log(this.props)
         return (
             <div>
+                <Header as='h1'>Thunk Router Showcase</Header>
 
                 <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/thunk.md'></MarkdownViewer>
 
-                <h2>ThunkShowcase</h2>
                 Number: {num}
                 {/* <button onClick={this.add}>Add</button> */}
                 {/* <button onClick={this.sub}>Subtract</button> */}

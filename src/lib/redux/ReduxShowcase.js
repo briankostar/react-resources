@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Menu, Header } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 
 const mapStateToProps = state => {
@@ -20,17 +21,31 @@ const mapDispatchToProps = dispatch => {
 }
 
 class ReduxShowcase extends Component {
+    state = { activeItem: '' }
+
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name });
+        this.props.history.push(`${this.props.match.url}${name}`)
+    }
+
     render() {
+        const { activeItem } = this.state
         const { num, add, sub } = this.props;
         return (
             <div>
+                <Header as='h1'>Redux Router Showcase</Header>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/redux.md'></MarkdownViewer>
+                <Menu tabular>
+                    <Menu.Item name='' active={activeItem === 'Notes'} onClick={this.handleItemClick} >Notes</Menu.Item>
+                    <Menu.Item name='/demo' active={activeItem === 'Demo'} onClick={this.handleItemClick} />
+                </Menu>
 
-                <h2>ReduxShowcase</h2>
                 Number: {num}
                 <button onClick={add}>Add</button>
                 <button onClick={sub}>Subtract</button>
+
+                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/redux.md'></MarkdownViewer>
+
             </div>
         )
     }

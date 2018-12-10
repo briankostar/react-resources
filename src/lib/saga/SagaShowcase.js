@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button } from 'semantic-ui-react'
+import { Menu, Header } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 
 const mapStateToProps = state => {
@@ -24,10 +25,19 @@ const mapDispatchToProps = dispatch => {
 }
 
 class SagaShowcase extends Component {
+    state = { activeItem: '' }
+
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name });
+        this.props.history.push(`${this.props.match.url}${name}`)
+    }
+
     render() {
+        const { activeItem } = this.state
         const { num, add, add_async, sub } = this.props;
         return (
             <div>
+                <Header as='h1'>Saga Router Showcase</Header>
 
                 <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/saga.md'></MarkdownViewer>
 

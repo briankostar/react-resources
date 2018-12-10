@@ -158,4 +158,17 @@ We can also reroute with history. Make a HOC with `withRouter`, which will have 
 You may want to prompt user before transition. ie when form is only half filled, or unsaved state. Use `<Prompt>` for handling this.  
 
     <Prompt when={this.state.isBlocking} message="You have unsaved changes. Sure you wanna move?"></Prompt>
-            
+
+
+--------------
+### Use case: What if we want to combine Link with Button component?
+What if we had a Nav or Button component we want to use to Link to another page? Perhaps the easiest way would be to:
+
+    <Link to="path"><Nav>Home</Nav></Link>
+
+However, what if Nav is a 3rd party component that creates its own `<a>`? We'd get a error as we're trying to wrap `<a> with <a> from Link`. In these cases, we can programatically route using the `history` object. All we'd have to do is push the new route to the history object. And we can have access to this object either as HOC, withRouter, from Route component rendering.
+
+    this.props.history.push(`newpath`)
+
+Add that functionality to Nav, and that should solve our issue.
+
