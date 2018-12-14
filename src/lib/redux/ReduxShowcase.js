@@ -1,24 +1,9 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { Route } from "react-router-dom";
 import { Menu, Header } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 
-const mapStateToProps = state => {
-    return {
-        num: state.num
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        add: () => {
-            dispatch({ type: 'ADD' })
-        },
-        sub: () => {
-            dispatch({ type: 'SUB' })
-        }
-    }
-}
+import AddSubtract from './AddSubtract'
 
 class ReduxShowcase extends Component {
     state = { activeItem: '' }
@@ -30,28 +15,26 @@ class ReduxShowcase extends Component {
 
     render() {
         const { activeItem } = this.state
-        const { num, add, sub } = this.props;
         return (
             <div>
                 <Header as='h1'>Redux Router Showcase</Header>
 
                 <Menu tabular>
                     <Menu.Item name='' active={activeItem === 'Notes'} onClick={this.handleItemClick} >Notes</Menu.Item>
-                    <Menu.Item name='/demo' active={activeItem === 'Demo'} onClick={this.handleItemClick} />
+                    <Menu.Item name='/add-subtract' active={activeItem === 'AddSubtract'} onClick={this.handleItemClick} />
                 </Menu>
 
-                Number: {num}
-                <button onClick={add}>Add</button>
-                <button onClick={sub}>Subtract</button>
+                <Route path={`${this.props.match.url}/add-subtract`} component={AddSubtract}></Route>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/redux.md'></MarkdownViewer>
+                {
+                    this.props.location.pathname === '/redux' ?
+                        <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/redux.md'></MarkdownViewer>
+                        : null
+                }
 
             </div>
         )
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ReduxShowcase)
+export default ReduxShowcase;
