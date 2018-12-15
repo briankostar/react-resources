@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from "react-router-dom";
-import { Menu, Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 import TabContainer from '../../components/TabContainer'
 

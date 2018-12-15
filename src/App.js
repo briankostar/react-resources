@@ -8,7 +8,6 @@ import { ReactRouterShowcase } from './lib/react-router/ReactRouterShowcase'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import rootReducer from './lib/redux/reducers/index';
-import thunk from 'redux-thunk';
 
 import Home from './components/home/home'
 import ReduxShowcase from './lib/redux/ReduxShowcase'
@@ -16,20 +15,19 @@ import ThunkShowcase from './lib/thunk/ThunkShowcase'
 import rootSaga from './lib/saga/sagas/index'
 import SagaShowcase from './lib/saga/SagaShowcase'
 
-
-// Saga
+//middlewares
+import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga'
-const sagaMiddleware = createSagaMiddleware()
+const sagas = createSagaMiddleware()
+
+const middlewares = [thunk, sagas];
 
 const store = createStore(
   rootReducer,
-  // applyMiddleware(thunk),
-  applyMiddleware(sagaMiddleware)
+  applyMiddleware(...middlewares)
 );
 
-sagaMiddleware.run(rootSaga)
-
-const Index = () => <h2>Home</h2>;
+sagas.run(rootSaga)
 
 class App extends Component {
 

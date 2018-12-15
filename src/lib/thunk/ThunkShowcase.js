@@ -1,76 +1,34 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { Menu, Header } from 'semantic-ui-react'
+import { Route } from "react-router-dom";
+import { Header } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
+import TabContainer from '../../components/TabContainer'
 
-//thunk is a function that returns an expression for use later.
-//in redux-thunk case, it returns a function that takes dispatch, and uses that dispatch after an async call
-//when thunk middleware takes this function, it'll call the function inside it, passing the dispatch obj
-function thunkForActionDispatch(type) {
-    return function (dispatch) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => { resolve() }, 500);
-        }).then(
-            sucess => dispatch({ type: type }) //normally put action creator here based on output
-        )
-    }
-}
+import AddSubtract from './AddSubtract'
 
 class ThunkShowcase extends Component {
-    state = { activeItem: '' }
-
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name });
-        this.props.history.push(`${this.props.match.url}${name}`)
-    }
-
-    add = () => {
-        this.props.dispatch(thunkForActionDispatch('ADD'));
-    }
-
-    sub = () => {
-        this.props.dispatch(thunkForActionDispatch('SUB'));
-    }
 
     render() {
-        const { activeItem } = this.state
-        const { num, addViaConnect, subViaConnect } = this.props;
-        console.log(this.props)
+        let menuItems = [{ url: '/', name: 'Notes' },
+        { url: '/add-subtract', name: 'AddSubtract' }]
+
         return (
             <div>
                 <Header as='h1'>Thunk Router Showcase</Header>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/thunk.md'></MarkdownViewer>
+                <TabContainer menuItems={menuItems}></TabContainer>
 
-                Number: {num}
-                {/* <button onClick={this.add}>Add</button> */}
-                {/* <button onClick={this.sub}>Subtract</button> */}
-                <button onClick={addViaConnect}>addViaConnect</button>
-                <button onClick={subViaConnect}>subViaConnect</button>
+                <Route path={`${this.props.match.url}/add-subtract`} component={AddSubtract}></Route>
+
+                {
+                    this.props.location.pathname === '/thunk' ?
+                        <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/thunk.md'></MarkdownViewer>
+                        : null
+                }
+
             </div>
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        num: state.num
-    }
-}
-
-//We can use this method too, but this will stop 'dispatch' from being pass to props.
-const mapDispatchToProps = dispatch => {
-    return {
-        addViaConnect: () => {
-            dispatch(thunkForActionDispatch('ADD'));
-        },
-        subViaConnect: () => {
-            dispatch(thunkForActionDispatch('SUB'));
-        }
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps  //this is optional. If not passed, ThunkShowcase receives dispatch obj which we can still use for thunk
-)(ThunkShowcase)
+export default ThunkShowcase;
