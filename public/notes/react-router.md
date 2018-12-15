@@ -166,9 +166,20 @@ What if we had a Nav or Button component we want to use to Link to another page?
 
     <Link to="path"><Nav>Home</Nav></Link>
 
-However, what if Nav is a 3rd party component that creates its own `<a>`? We'd get a error as we're trying to wrap `<a> with <a> from Link`. In these cases, we can programatically route using the `history` object. All we'd have to do is push the new route to the history object. And we can have access to this object either as HOC, withRouter, from Route component rendering.
+However, what if Nav is a 3rd party component that creates its own `<a>`? We'd get a error as we're trying to wrap `<a> with <a> from Link`. In these cases, we can programatically route using the `history` object. 
+All we'd have to do is push the new route to the history object. 
 
     this.props.history.push(`newpath`)
+
+    
+We can have access to `history` object in your component several ways:
+
+1. HOC with withRouter
+
+    import { withRouter } from 'react-router'
+    export default withRouter(MyComponent);
+
+2. Just use <Route>
 
 Add that functionality to Nav, and that should solve our issue.
 

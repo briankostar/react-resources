@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
-import { Menu, Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
 
 import { DynamicSubRoute } from './DynamicSubRoute'
 import { SimpleLogin } from './SimpleLogin'
@@ -8,29 +8,22 @@ import { PromptForm } from './PromptForm'
 import { FourOhFour } from './404'
 
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
+import TabContainer from '../../components/TabContainer'
 
 export class ReactRouterShowcase extends Component {
-    state = { activeItem: '' }
-
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name });
-        this.props.history.push(`${this.props.match.url}${name}`)
-    }
 
     render() {
-        const { activeItem } = this.state
+        let menuItems = [{ url: '/', name: 'Notes' },
+        { url: '/dynamic-sub-route', name: 'Dynamic Sub Route' },
+        { url: '/simple-login', name: 'Simple Login' },
+        { url: '/prompt', name: 'Prompt' },
+        { url: '/404', name: '404' }]
 
         return (
             <div>
                 <Header as='h1'>React Router Showcase</Header>
 
-                <Menu tabular>
-                    <Menu.Item name='' active={activeItem === 'Notes'} onClick={this.handleItemClick} >Notes</Menu.Item>
-                    <Menu.Item name='/dynamic-sub-route' active={activeItem === 'Dynamic Sub Route'} onClick={this.handleItemClick} />
-                    <Menu.Item name='/simple-login' active={activeItem === 'Simple Login'} onClick={this.handleItemClick} />
-                    <Menu.Item name='/prompt' active={activeItem === 'Prompt'} onClick={this.handleItemClick} />
-                    <Menu.Item name='/404' active={activeItem === '404'} onClick={this.handleItemClick} />
-                </Menu>
+                <TabContainer menuItems={menuItems}></TabContainer>
 
                 <Route path={`${this.props.match.url}/dynamic-sub-route`} component={DynamicSubRoute}></Route>
                 <Route path={`${this.props.match.url}/simple-login`} component={SimpleLogin}></Route>
