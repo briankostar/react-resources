@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Button } from 'semantic-ui-react'
-import { Menu, Header } from 'semantic-ui-react'
+import { Route } from "react-router-dom";
+import { Header } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
+import TabContainer from '../../components/TabContainer'
+
+import AddSubtract from './AddSubtract'
 
 const mapStateToProps = state => {
     return {
@@ -25,33 +27,27 @@ const mapDispatchToProps = dispatch => {
 }
 
 class SagaShowcase extends Component {
-    state = { activeItem: '' }
-
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name });
-        this.props.history.push(`${this.props.match.url}${name}`)
-    }
 
     render() {
-        const { activeItem } = this.state
-        const { num, add, add_async, sub } = this.props;
+        let menuItems = [{ url: '/', name: 'Notes' },
+        { url: '/add-subtract', name: 'AddSubtract' }]
+
         return (
             <div>
                 <Header as='h1'>Saga Router Showcase</Header>
 
-                <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/saga.md'></MarkdownViewer>
+                <TabContainer menuItems={menuItems}></TabContainer>
 
-                <h2>SagaShowcase</h2>
-                Number: {num}
-                <Button primary onClick={add}>Add</Button>
-                <Button primary onClick={add_async}>Add After 1 Sec</Button>
-                <Button primary onClick={sub}>Subtract</Button>
+                <Route path={`${this.props.match.url}/add-subtract`} component={AddSubtract}></Route>
+
+                {
+                    this.props.location.pathname === '/saga' ?
+                        <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/saga.md'></MarkdownViewer>
+                        : null
+                }
             </div>
         )
     }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(SagaShowcase)
+export default SagaShowcase;
