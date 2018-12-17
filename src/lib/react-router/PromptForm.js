@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Link, Prompt } from "react-router-dom";
+import { Link, Prompt } from "react-router-dom";
+import { Button } from 'semantic-ui-react'
 
 export class PromptForm extends React.Component {
     state = { isBlocking: false };
@@ -28,7 +29,7 @@ export class PromptForm extends React.Component {
                             this.setState({ isBlocking: event.target.value.length > 0 })
                         }} />
 
-                    <button>Submit</button>
+                    <Button>Submit</Button>
                 </form>
 
                 <Prompt when={this.state.isBlocking} message="You have unsaved changes. Sure you wanna move?"></Prompt>

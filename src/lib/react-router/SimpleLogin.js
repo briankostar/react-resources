@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Link, Redirect, withRouter } from "react-router-dom";
+import { Button } from 'semantic-ui-react'
 
 let auth = {
     isAuthenticated: false,
@@ -31,7 +32,7 @@ class loginComponent extends React.Component {
     }
     render() {
         if (this.state.redirect) { return <Redirect to='/react-router/simple-login/private'></Redirect>; }
-        return (<div> Login Here < button onClick={this.login} > Log in</button > </div >)
+        return (<div> Login Here < Button onClick={this.login} > Log in</Button > </div >)
     }
 }
 
@@ -60,13 +61,13 @@ const AuthButton = withRouter(
         auth.isAuthenticated ? (
             <p>
                 Welcome!{" "}
-                <button
+                <Button
                     onClick={() => {
                         auth.logout(() => history.push("/react-router/simple-login"));
                     }}
                 >
                     Sign out
-          </button>
+          </Button>
             </p>
         ) : (
                 <p>You are not logged in.</p>
@@ -79,10 +80,11 @@ export function SimpleLogin({ match }) {
             <h2>Simple login</h2>
             <p>Show main, public, private page. private page is only accessible if conditions met</p>
             <AuthButton></AuthButton>
-            <Link to={`${match.url}/public`}>public</Link>
-            <Link to={`${match.url}/private`}>private</Link>
+            <Link to={`${match.url}/public`}>public</Link><br />
+            <Link to={`${match.url}/private`}>private</Link><br />
             {/* <Link to={`${match.url}/login`}>login</Link> */}
 
+            <hr />
             <Route path={`${match.url}/public`} render={publicComponent}></Route>
             {/* <Route path={`${match.url}/private`} render={privateComponent}></Route> */}
             <Route path={`${match.url}/login`} component={loginComponent}></Route>

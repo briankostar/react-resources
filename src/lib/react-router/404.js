@@ -30,9 +30,10 @@ export function FourOhFour({ match }) {
     return (
         <div>
             <h2>DynamicSubRoute</h2>
-            <Link to={`${match.url}/exists`}>exists1</Link>
-            <Link to={`${match.url}/asfsdfasdf`}>asdf2fasdf</Link>
+            <Link to={`${match.url}/exists`}>exists1</Link><br />
+            <Link to={`${match.url}/asfsdfasdf`}>asdf2fasdf</Link><br />
 
+            <hr />
             <Switch>
                 <Route path={`${match.path}/`} exact component={Default} />
                 <Route path={`${match.path}/exists`} component={Exists}></Route>
