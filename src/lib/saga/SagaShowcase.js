@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from "react-router-dom";
-import { Header } from 'semantic-ui-react'
+import { Header, Container } from 'semantic-ui-react'
 import MarkdownViewer from '../../components/markdownViewer/markdownViewer'
 import TabContainer from '../../components/TabContainer'
 
@@ -34,17 +34,19 @@ class SagaShowcase extends Component {
 
         return (
             <div>
-                <Header as='h1'>Saga Router Showcase</Header>
+                <Header as='h1'>Saga Showcase</Header>
 
                 <TabContainer menuItems={menuItems}></TabContainer>
 
-                <Route path={`${this.props.match.url}/add-subtract`} component={AddSubtract}></Route>
+                <Container className='container'>
+                    <Route path={`${this.props.match.url}/add-subtract`} component={AddSubtract}></Route>
 
-                {
-                    this.props.location.pathname === '/saga' ?
-                        <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/saga.md'></MarkdownViewer>
-                        : null
-                }
+                    {
+                        this.props.location.pathname === '/saga' ?
+                            <MarkdownViewer src='https://raw.githubusercontent.com/briankostar/react-resources/master/public/notes/saga.md'></MarkdownViewer>
+                            : null
+                    }
+                </Container>
             </div>
         )
     }

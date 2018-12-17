@@ -75,7 +75,8 @@ const AuthButton = withRouter(
 
 export function SimpleLogin({ match }) {
     return (
-        <div>Simple login
+        <div>
+            <h2>Simple login</h2>
             <p>Show main, public, private page. private page is only accessible if conditions met</p>
             <AuthButton></AuthButton>
             <Link to={`${match.url}/public`}>public</Link>
