@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Button } from 'semantic-ui-react'
 
 //thunk is a function that returns an expression for use later.
 //in redux-thunk case, it returns a function that takes dispatch, and uses that dispatch after an async call
@@ -28,11 +29,11 @@ class AddSubtract extends Component {
         const { num, addViaConnect, subViaConnect } = this.props;
         return (
             <div>
-                Number: {num}
+                <p>Number: {num}</p>
                 {/* <button onClick={this.add}>Add</button> */}
                 {/* <button onClick={this.sub}>Subtract</button> */}
-                <button onClick={addViaConnect}>addViaConnect</button>
-                <button onClick={subViaConnect}>subViaConnect</button>
+                <Button primary onClick={addViaConnect}>Add</Button>
+                <Button primary onClick={subViaConnect}>Subtract</Button>
             </div>
         )
     }

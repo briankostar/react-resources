@@ -29,7 +29,7 @@ export class PromptForm extends React.Component {
                             this.setState({ isBlocking: event.target.value.length > 0 })
                         }} />
 
-                    <Button>Submit</Button>
+                    <Button primary>Submit</Button>
                 </form>
 
                 <Prompt when={this.state.isBlocking} message="You have unsaved changes. Sure you wanna move?"></Prompt>

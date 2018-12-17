@@ -27,7 +27,7 @@ class AddSubtract extends Component {
         const { num, add, add_async, sub } = this.props;
         return (
             <div>
-                Number: {num}
+                <p>Number: {num}</p>
                 <Button primary onClick={add}>Add</Button>
                 <Button primary onClick={add_async}>Add After 1 Sec</Button>
                 <Button primary onClick={sub}>Subtract</Button>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import { Button } from 'semantic-ui-react'
+
 const mapStateToProps = state => {
     return {
         num: state.num
@@ -24,9 +26,9 @@ class AddSubtract extends Component {
         const { num, add, sub } = this.props;
         return (
             <div>
-                Number: {num}
-                <button onClick={add}>Add</button>
-                <button onClick={sub}>Subtract</button>
+                <p>Number: {num}</p>
+                <Button primary onClick={add}>Add</Button>
+                <Button primary onClick={sub}>Subtract</Button>
             </div>
         )
     }

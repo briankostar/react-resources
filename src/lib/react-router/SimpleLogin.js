@@ -32,7 +32,7 @@ class loginComponent extends React.Component {
     }
     render() {
         if (this.state.redirect) { return <Redirect to='/react-router/simple-login/private'></Redirect>; }
-        return (<div> Login Here < Button onClick={this.login} > Log in</Button > </div >)
+        return (<div> Login Here < Button primary onClick={this.login} > Log in</Button > </div >)
     }
 }
 
@@ -61,7 +61,7 @@ const AuthButton = withRouter(
         auth.isAuthenticated ? (
             <p>
                 Welcome!{" "}
-                <Button
+                <Button primary
                     onClick={() => {
                         auth.logout(() => history.push("/react-router/simple-login"));
                     }}
