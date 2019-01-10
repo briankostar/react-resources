@@ -6,6 +6,19 @@ Redux library for managing async data fetching. It's a redux middleware and uses
 ## Why
 Compared to redux-thunk, saga has cleaner syntax use and is more useful for more complex data manipulation.
 
+## Summary
+Saga makes async calls and other data changing actions easier to manage.  
+It's a middleware, so it intercepts actions and takes control.  
+A saga, is a generator function that causes a "side-effect/Effect".  
+    It uses yield, which returns a value in a step of the generator fcn. This Effect is sent to the middleware for processing.  
+    If yield returns promise/blocking Effect, saga middlewares waits until its resolved to get the next yield value.  
+        We want to do this if the next yield would depend on the earlier resolve.  
+    Otherwise, if yield returns non-blocking effect, such as action, the saga middleware immidiately iterates to the next yield.  
+Effect is just.. anything that we define for the yield in the generator to return. (API call, promise, even actions for store)  
+Effect is technically an object that has instructions for the saga middleware. Its created by Effect Creator functions.   
+    Eg. call() returns something like {CALL: [fcn, arg]} which the saga middleware will interpret.  
+We often want to divide the generator to be Watchers (catching action and calls other) and Workers(api call, dispatch action type)  
+
 ## How
 Use it similarly to redux thunk, as a middleware.
 

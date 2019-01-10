@@ -6,26 +6,6 @@ import TabContainer from '../../components/TabContainer'
 
 import AddSubtract from './AddSubtract'
 
-const mapStateToProps = state => {
-    return {
-        num: state.num
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        add: () => {
-            dispatch({ type: 'ADD' })
-        },
-        add_async: () => {
-            dispatch({ type: 'ADD_ASYNC' })
-        },
-        sub: () => {
-            dispatch({ type: 'SUB' })
-        }
-    }
-}
-
 class SagaShowcase extends Component {
 
     render() {
