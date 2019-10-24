@@ -37,6 +37,13 @@ Remember, we cannot directly use the store. We need to use `dispatch` and `state
 Connect function from `react-redux` basically wraps any component, and gives it ability to get/set from the `store`. Since it has access to the store's `state` and `dispatch`, it'll get the specified data from the state, and also give dispatch function and inject them into the target component.   
 Simply it gets data from the store, and gives means to update the store.  
 
+Connect() can take 2 functions. First maps & passes store variables to the component. Second takes dispatch and passes dispatching functions to the component. By convention we call it mapStateToProps and mapDispatchToProps. 
+If we want to return dispatch function and other functions that uses dispatch, we can do this: 
+    connect(
+        mapStateToProps,
+        dispatch => ({ dispatch, ...bindActionCreators({ destroyTodo }, dispatch) })
+      )
+
     import { connect } from 'react-redux'
 
     const TodoItem = ({ todo, destroyTodo }) => {
